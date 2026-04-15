@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGADE Onboarding Magazine — EGADE Business School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--white:#fafafa;--grey1:#1a1a1a;--grey2:#333;--grey3:#555;--grey4:#888;--grey5:#bbb;--grey6:#e0e0e0;--grey7:#f0f0f0;--accent:#2a2a2a;--serif:'Playfair Display',Georgia,serif;--sans:'Source Sans 3','Helvetica Neue',sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--white);color:var(--grey1);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--black);color:var(--white)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--grey6);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;transition:transform .3s}
+.nav-logo{font-family:var(--serif);font-weight:900;font-size:1rem;letter-spacing:-.02em}
+.nav-links{display:flex;gap:1.5rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+.nav-links a{color:var(--grey3);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--black)}
+.nav-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--black);transition:width .15s}
+
+/* HERO / COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem;background:var(--black);color:var(--white);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#111 0%,#000 50%,#1a1a1a 100%)}
+.cover-content{position:relative;z-index:2;max-width:700px}
+.cover h1{font-family:var(--serif);font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:.95;letter-spacing:-.04em;margin-bottom:1rem}
+.cover .subtitle{font-size:1.1rem;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:var(--grey4);margin-bottom:2rem}
+.cover .edition{font-family:var(--mono);font-size:.75rem;color:var(--grey5);letter-spacing:.2em;margin-top:2rem;border-top:1px solid var(--grey2);padding-top:1.5rem;display:inline-block}
+.cover .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey4);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* SECTIONS */
+.section{padding:5rem 2rem;max-width:800px;margin:0 auto}
+.section-wide{max-width:1100px}
+.chapter-header{padding:6rem 2rem;text-align:center;border-top:3px solid var(--black);border-bottom:1px solid var(--grey6);margin:0 auto;max-width:800px}
+.chapter-header .ch-num{font-family:var(--mono);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey4);margin-bottom:1rem}
+.chapter-header h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
+.chapter-header p{font-size:1.05rem;color:var(--grey3);max-width:550px;margin:0 auto;font-weight:300}
+
+h3{font-family:var(--serif);font-size:1.6rem;font-weight:700;margin:2.5rem 0 1rem;letter-spacing:-.02em}
+h4{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin:2rem 0 .8rem;color:var(--grey2)}
+p{margin-bottom:1.2rem;color:var(--grey2);font-weight:300;font-size:1.02rem}
+strong{font-weight:600;color:var(--black)}
+a{color:var(--black);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+
+/* LISTS */
+ul,ol{margin:0 0 1.5rem 1.5rem;color:var(--grey2);font-weight:300}
+li{margin-bottom:.4rem}
+li strong{color:var(--black)}
+
+/* IMAGE PLACEHOLDER */
+.img-placeholder{background:var(--grey7);border:2px dashed var(--grey5);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;color:var(--grey4);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin:2rem 0;min-height:250px;position:relative;overflow:hidden}
+.img-placeholder svg{width:40px;height:40px;stroke:var(--grey5);fill:none;stroke-width:1.5}
+.img-placeholder.hero-img{min-height:400px;background:var(--grey1);color:var(--grey5);border:none;border-radius:0;margin:0 -2rem}
+.img-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:2rem 0}
+.img-grid .img-placeholder{min-height:180px;margin:0}
+
+/* MEDIA PLACEHOLDERS */
+.media-box{background:var(--grey7);border-radius:6px;padding:1.5rem;margin:2rem 0;display:flex;align-items:center;gap:1rem;border:1px solid var(--grey6)}
+.media-box.video{background:var(--black);color:var(--white);border:none}
+.media-box.video .media-icon{background:var(--white);color:var(--black)}
+.media-box.audio{background:var(--grey1);color:var(--white);border:none}
+.media-box.audio .media-icon{background:var(--white);color:var(--black)}
+.media-icon{width:48px;height:48px;border-radius:50%;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.media-info{flex:1}
+.media-info .media-title{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
+.media-info .media-desc{font-size:.8rem;opacity:.7;font-weight:300;margin:0}
+
+/* CARDS / GRID */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
+.card{background:var(--white);border:1px solid var(--grey6);padding:1.5rem;border-radius:2px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.card h4{margin-top:0;font-size:.85rem}
+.card p{font-size:.9rem;margin-bottom:.5rem}
+.card a{font-size:.85rem}
+
+/* CHECKLIST */
+.checklist{list-style:none;margin-left:0;padding:0}
+.checklist li{padding:.8rem 1rem;border-bottom:1px solid var(--grey6);display:flex;gap:.8rem;align-items:flex-start;font-size:.95rem}
+.checklist li .check{width:20px;height:20px;border:2px solid var(--grey5);border-radius:3px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.checklist li .check.checked{background:var(--black);border-color:var(--black);color:var(--white)}
+
+/* CONTACT CARDS */
+.contact-card{display:flex;gap:1.2rem;padding:1.5rem;background:var(--grey7);border-radius:4px;margin:1rem 0;align-items:flex-start}
+.contact-avatar{width:56px;height:56px;border-radius:50%;background:var(--grey5);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:1.2rem;color:var(--white)}
+.contact-info h4{margin:0 0 .2rem;font-size:.95rem;text-transform:none;letter-spacing:0}
+.contact-info .role{font-size:.8rem;color:var(--grey4);margin-bottom:.4rem}
+.contact-info a{font-size:.85rem;font-family:var(--mono)}
+
+/* QUIZ */
+.quiz-container{background:var(--grey7);border-radius:6px;padding:2rem;margin:2.5rem 0;border:1px solid var(--grey6)}
+.quiz-container h4{margin-top:0;font-size:.9rem;color:var(--grey4)}
+.quiz-q{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--grey6)}
+.quiz-q:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.quiz-q .q-text{font-weight:600;color:var(--black);margin-bottom:.8rem;font-size:.95rem}
+.quiz-q .q-options{display:flex;flex-direction:column;gap:.4rem}
+.quiz-q .q-opt{padding:.6rem 1rem;border:1px solid var(--grey6);border-radius:4px;cursor:pointer;font-size:.88rem;transition:all .2s;background:var(--white)}
+.quiz-q .q-opt:hover{border-color:var(--grey3)}
+.quiz-q .q-opt.correct{background:#e8f5e9;border-color:#4caf50;color:#2e7d32}
+.quiz-q .q-opt.incorrect{background:#ffebee;border-color:#f44336;color:#c62828}
+.quiz-q .q-feedback{margin-top:.6rem;padding:.8rem 1rem;border-radius:4px;font-size:.85rem;font-weight:400;display:none}
+.quiz-q .q-feedback.show{display:block}
+.quiz-q .q-feedback.pos{background:#e8f5e9;color:#1b5e20}
+.quiz-q .q-feedback.neg{background:#ffebee;color:#b71c1c}
+
+/* LINK BOX */
+.link-box{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--black);color:var(--white);border-radius:4px;margin:1.5rem 0;text-decoration:none;transition:transform .2s}
+.link-box:hover{transform:translateY(-2px);color:var(--white)}
+.link-box .lb-icon{font-size:1.4rem}
+.link-box .lb-text{flex:1}
+.link-box .lb-title{font-weight:700;font-size:.9rem;display:block;color:var(--white)}
+.link-box .lb-url{font-size:.75rem;font-family:var(--mono);opacity:.6;color:var(--white)}
+.link-box .lb-arrow{font-size:1.2rem;opacity:.5}
+
+/* DIVIDERS */
+.divider{border:none;border-top:1px solid var(--grey6);margin:3rem 0}
+.divider-thick{border-top:3px solid var(--black);margin:4rem 0}
+
+/* TOC */
+.toc{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc li{counter-increment:toc;border-bottom:1px solid var(--grey6)}
+.toc li a{display:flex;align-items:baseline;gap:1rem;padding:1.2rem 0;text-decoration:none;color:var(--grey2);transition:color .2s}
+.toc li a:hover{color:var(--black)}
+.toc li a::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:.75rem;color:var(--grey4);flex-shrink:0}
+.toc li a .toc-title{font-family:var(--serif);font-size:1.3rem;font-weight:700;flex:1}
+.toc li a .toc-arrow{font-size:1rem;color:var(--grey5)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem;margin:2rem 0}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--grey6)}
+.timeline-item{position:relative;padding-bottom:2rem}
+.timeline-item::before{content:'';position:absolute;left:-2rem;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--black);border:2px solid var(--white);transform:translateX(-4px)}
+.timeline-item h4{margin-top:0}
+
+/* FOOTER */
+.footer{background:var(--black);color:var(--white);padding:4rem 2rem;text-align:center}
+.footer p{color:var(--grey4);font-size:.85rem}
+.footer a{color:var(--grey5)}
+.footer .footer-logo{font-family:var(--serif);font-size:1.8rem;font-weight:900;margin-bottom:1rem}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .cover h1{font-size:2.8rem}
+  .section{padding:3rem 1.2rem}
+  .chapter-header{padding:4rem 1.2rem}
+  .card-grid{grid-template-columns:1fr}
+  .img-placeholder.hero-img{margin:0 -1.2rem}
+}
+
+/* PRINT */
+@media print{.nav,.scroll-hint,.quiz-container{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">EGADE Onboarding Magazine</div>
+  <div class="nav-links">
+    <a href="#toc">Contenido</a>
+    <a href="#ch1">EGADE</a>
+    <a href="#ch2">Modelo</a>
+    <a href="#ch3">Checklist</a>
+    <a href="#ch4">Canvas</a>
+    <a href="#ch5">Evaluación</a>
+    <a href="#ch6">Desarrollo</a>
+    <a href="#ch7">Contactos</a>
+  </div>
+  <div class="nav-progress" id="progressBar"></div>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="top">
+  <div class="cover-content">
+    <p class="subtitle">EGADE Business School · Tecnológico de Monterrey</p>
+    <h1>EGADE Onboarding Magazine</h1>
+    <p style="color:var(--grey4);font-weight:300;font-size:1.05rem;margin-top:1rem;">Tu guía integral para iniciar con éxito como profesor en una de las escuelas de negocios más prestigiosas de América Latina.</p>
+    <span class="edition">Edición Abril — Julio 2026 &nbsp;·&nbsp; 30 Aniversario EGADE</span>
+  </div>
+  <div class="scroll-hint">↓ Scroll para explorar</div>
+</section>
+
+<!-- WELCOME -->
+<section class="section" style="padding-top:4rem">
+  <div class="img-placeholder hero-img">
+    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M2 16l5-5 3 3 4-4 8 8"/></svg>
+    FOTO — Campus EGADE Business School
+  </div>
+</section>
+<section class="section">
+  <h3>Mensaje de Bienvenida</h3>
+  <p><strong>Estimado/a profesor/a:</strong></p>
+  <p>Es un gusto darle la bienvenida a EGADE Business School del Tecnológico de Monterrey, la escuela de negocios más globalizada de América Latina, donde la innovación y la transformación son parte del día a día en un entorno desafiante e inspirador.</p>
+  <p>Aquí formamos liderazgo para los negocios globales con visión, impacto y propósito. Somos la única escuela multi-campus en la región con la <strong>Triple Corona</strong> de acreditaciones internacionales (AACSB, AMBA y EQUIS), y estamos clasificados como <strong>#1 en América Latina</strong> según el QS Global MBA Ranking.</p>
+  <p>Esta revista digital ha sido diseñada para acompañarle en su proceso de integración. Aquí encontrará todo lo que necesita: desde conocer nuestra identidad institucional, hasta configurar su curso en Canvas y acceder a las herramientas de evaluación.</p>
+  <p style="margin-top:2rem;font-style:italic;color:var(--grey3)">— Dirección de Desarrollo Académico, EGADE Business School</p>
+  <p style="font-size:.9rem;color:var(--grey3);margin-top:1rem">Contenido basado en la <strong>Sesión de Inducción para Profesores</strong> del 8 de abril de 2026, presidida por el <strong>Dr. José Ernesto Amorós Espinosa</strong>, Decano Asociado de Facultad, y el equipo de Desarrollo Académico liderado por <strong>Mariana Núñez Almanza</strong>.</p>
+  
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video de Bienvenida</div>
+      <p class="media-desc">Mensaje de la Dirección de Desarrollo Académico para nuevos profesores.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section class="section" id="toc">
+  <hr class="divider-thick">
+  <h3 style="text-align:center;margin-bottom:2rem">Contenido</h3>
+  <ol class="toc">
+    <li><a href="#ch1"><span class="toc-title">Conoce EGADE</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch2"><span class="toc-title">Modelo Educativo</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch3"><span class="toc-title">Antes de Iniciar tu Curso</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch4"><span class="toc-title">Canvas y Herramientas Digitales</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch5"><span class="toc-title">Evaluación y Calidad Académica</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch6"><span class="toc-title">Desarrollo Profesional y Comunidad</span><span class="toc-arrow">→</span></a></li>
+    <li><a href="#ch7"><span class="toc-title">Contactos y Recursos Clave</span><span class="toc-arrow">→</span></a></li>
+  </ol>
+</section>
+
+<!-- ========== CHAPTER 1 ========== -->
+<div class="chapter-header" id="ch1">
+  <div class="ch-num">Capítulo 01</div>
+  <h2>Conoce EGADE</h2>
+  <p>Propósito, acreditaciones, campus, oferta académica y centros de investigación.</p>
+</div>
+
+<section class="section">
+  <h3>Nuestro Propósito</h3>
+  <p>En EGADE Business School, nuestro propósito es <strong>repensar el futuro de los negocios para que impacten en el desarrollo sostenible de México y América Latina.</strong></p>
+  <p>Para alcanzarlo, desafiamos los paradigmas actuales y redefinimos el rol de los negocios en la sociedad, creando un ecosistema que impulsa la transformación y el impacto positivo en la sociedad, de América Latina al mundo.</p>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video Institucional EGADE</div>
+      <p class="media-desc">Conoce nuestra escuela en menos de 3 minutos.</p>
+    </div>
+  </div>
+  
+  <div class="img-placeholder hero-img">
+    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M2 16l5-5 3 3 4-4 8 8"/></svg>
+    FOTO — Experiencia EGADE · Alumnos y facultad
+  </div>
+
+  <h3>Rankings Recientes</h3>
+  <p>Iniciamos el trimestre abril-julio 2026 con excelentes noticias compartidas por el <strong>Dr. José Ernesto Amorós Espinosa</strong>, Decano Asociado de Facultad:</p>
+  <ul>
+    <li><strong>Financial Times — Top 20 mundial:</strong> Nuestro programa de Online MBA fue reconocido por primera vez por Financial Times, posicionándose en el Top 20 del mundo.</li>
+    <li><strong>QS por disciplinas:</strong> Cuatro disciplinas de negocios (incluyendo marketing) fueron destacadas en los resultados más recientes de QS.</li>
+    <li><strong>#1 en América Latina</strong> según el QS Global MBA Ranking.</li>
+  </ul>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video — Sesión de Inducción (8 de abril, 2026)</div>
+      <p class="media-desc">Mensaje del Dr. Amorós y anuncios del trimestre abril-julio 2026.</p>
+    </div>
+  </div>
+
+  <h3>Triple Corona de Acreditaciones</h3>
+  <p>Menos del <strong>1%</strong> de las escuelas de negocios en el mundo cuentan con la Triple Corona de acreditaciones simultáneamente:</p>
+  <ul>
+    <li><strong>AACSB</strong> — Association to Advance Collegiate Schools of Business</li>
+    <li><strong>AMBA</strong> — Association of MBAs</li>
+    <li><strong>EQUIS</strong> — European Quality Improvement System (EFMD)</li>
+  </ul>
+  <p>Estas acreditaciones evalúan excelencia académica, investigación, internacionalización, sostenibilidad y empleabilidad de egresados.</p>
+  
+  <div class="img-placeholder" style="min-height:120px">
+    IMAGEN — Logos AACSB · AMBA · EQUIS
+  </div>
+
+  <h3>Nuestros Campus</h3>
+  <p>EGADE tiene campus en <strong>Santa Fe (Ciudad de México), Monterrey y Guadalajara</strong>, donde ofrecemos programas de posgrado y educación ejecutiva. Nuestra presencia se extiende también a <strong>Querétaro</strong> mediante el programa Fly-In MBA y alternativas online, así como a <strong>Lima, Perú</strong>.</p>
+
+  <div class="img-grid">
+    <div class="img-placeholder">FOTO — Campus Santa Fe</div>
+    <div class="img-placeholder">FOTO — Campus Monterrey</div>
+    <div class="img-placeholder">FOTO — Campus Guadalajara</div>
+    <div class="img-placeholder">FOTO — Querétaro / Lima</div>
+  </div>
+  
+  <div class="img-placeholder" style="min-height:150px">
+    FOTO — Mascota del Tec de Monterrey (Borrego)
+  </div>
+
+  <div class="media-box audio">
+    <div class="media-icon">♪</div>
+    <div class="media-info">
+      <div class="media-title">Podcast — Territorio Negocios</div>
+      <p class="media-desc">Escucha historias de éxito de nuestra comunidad EGADE.</p>
+    </div>
+  </div>
+
+  <h3>Oferta Académica</h3>
+  <h4>Posgrados</h4>
+  <ul>
+    <li><strong>MBAs:</strong> EGADE MBA, MBA Online, Full-Time MBA, Global Executive MBA</li>
+    <li><strong>Maestrías:</strong> Business Analytics, Finanzas, Finanzas Online, Mercadotecnia, Gestión de Negocios, Negocios Sostenibles, Master in Business Management</li>
+    <li><strong>Doctorados:</strong> Ciencias Administrativas, Ciencias Financieras</li>
+  </ul>
+  <p>Plataforma <strong>EGADE xEd</strong> con modelo de vanguardia enfocado en competencias y visión global disruptiva.</p>
+
+  <h4>Educación Ejecutiva</h4>
+  <ul>
+    <li><strong>Liderazgo:</strong> Advanced Management Program, Women Leading Organizations</li>
+    <li><strong>Gobierno Corporativo:</strong> Formación de Consejeros de Administración</li>
+    <li><strong>Innovación:</strong> Chief Innovation Officer</li>
+    <li><strong>Digital & Analytics:</strong> IA para Altos Directivos</li>
+    <li><strong>Sostenibilidad:</strong> ESG y Finanzas Sostenibles</li>
+    <li><strong>Marketing:</strong> B2B Brand Bootcamp, Estrategia y Transformación del Retail</li>
+    <li><strong>In-Company:</strong> Soluciones Empresariales a la medida</li>
+  </ul>
+
+  <h3>Centros de Excelencia e Investigación</h3>
+  <div class="card-grid">
+    <div class="card"><h4>FAIR Center</h4><p>Financial Access, Inclusion and Research.</p></div>
+    <div class="card"><h4>Centro de Evolución Digital</h4><p>Transformación digital y tecnología.</p></div>
+    <div class="card"><h4>Centro de Comercio Detallista</h4><p>Retail, consumo y cadenas de valor.</p></div>
+    <div class="card"><h4>Centro de Empresas Conscientes</h4><p>Capitalismo consciente y propósito.</p></div>
+    <div class="card"><h4>Instituto de Familias Empresarias</h4><p>Para México y Latinoamérica.</p></div>
+  </div>
+  <p><strong>Grupos de investigación:</strong> Organizaciones, Estrategia y Sostenibilidad · Negocios, Finanzas y Economía Aplicada · Liderazgo y Dinámica Organizacional · Ciencia del Consumidor y Estrategia de Mercadotecnia · Innovación y Emprendimiento.</p>
+
+  <!-- QUIZ CH1 -->
+  <div class="quiz-container" id="quiz1">
+    <h4>Quiz — Capítulo 1: Conoce EGADE</h4>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">1. ¿Cuál es el propósito de EGADE Business School?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Formar ejecutivos para empresas multinacionales exclusivamente.</div>
+        <div class="q-opt" data-val="b">Repensar el futuro de los negocios para impactar el desarrollo sostenible de México y América Latina.</div>
+        <div class="q-opt" data-val="c">Competir por los primeros lugares en rankings internacionales.</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! El propósito de EGADE es repensar el futuro de los negocios para que impacten en el desarrollo sostenible de México y América Latina.</div>
+      <div class="q-feedback neg">Incorrecto. El propósito de EGADE es repensar el futuro de los negocios para impactar el desarrollo sostenible de México y América Latina, no solo formar ejecutivos o competir en rankings.</div>
+    </div>
+    <div class="quiz-q" data-correct="c">
+      <div class="q-text">2. ¿Qué porcentaje de escuelas de negocios en el mundo tienen la Triple Corona?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Aproximadamente el 10%</div>
+        <div class="q-opt" data-val="b">Aproximadamente el 5%</div>
+        <div class="q-opt" data-val="c">Menos del 1%</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Menos del 1% de las escuelas de negocios del mundo cuentan con las tres acreditaciones simultáneamente.</div>
+      <div class="q-feedback neg">Incorrecto. Es menos del 1%, lo cual convierte a EGADE en una institución muy selecta a nivel global.</div>
+    </div>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">3. ¿En cuántos campus principales opera EGADE?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">2 campus (Monterrey y CDMX)</div>
+        <div class="q-opt" data-val="b">3 campus principales (Santa Fe, Monterrey, Guadalajara) con presencia en Querétaro y Lima</div>
+        <div class="q-opt" data-val="c">5 campus en México</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! EGADE tiene 3 campus principales con presencia extendida en Querétaro y Lima, Perú.</div>
+      <div class="q-feedback neg">Incorrecto. EGADE opera en 3 campus principales: Santa Fe (CDMX), Monterrey y Guadalajara, con presencia adicional en Querétaro y Lima.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 2 ========== -->
+<div class="chapter-header" id="ch2">
+  <div class="ch-num">Capítulo 02</div>
+  <h2>Modelo Educativo</h2>
+  <p>Las 4 dimensiones que definen la experiencia de aprendizaje transformadora de EGADE.</p>
+</div>
+<section class="section">
+  <p>EGADE forma líderes con una experiencia de aprendizaje <strong>transformadora, internacional y de excelencia</strong>, sustentada en cuatro dimensiones clave:</p>
+  
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video — Modelo Educativo EGADE</div>
+      <p class="media-desc">Conoce las 4 dimensiones que definen nuestra experiencia formativa.</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-left:4px solid var(--black)"><h4>1. Agentes Transformadores</h4><p>La facultad inspira y guía a los líderes a impulsar la transformación en los negocios y su entorno. Como profesor, <strong>tú eres un agente transformador</strong> que desafía el statu quo.</p></div>
+    <div class="card" style="border-left:4px solid var(--grey3)"><h4>2. Aprendizaje Aplicado</h4><p>Estrategias de aprendizaje activo y experienciales: metodología de casos, proyectos reales con empresas, simulaciones de negocios y experiencias inmersivas.</p></div>
+    <div class="card" style="border-left:4px solid var(--grey4)"><h4>3. Co-creación de Valor</h4><p>Herramientas y acompañamiento para co-crear conocimiento y generar soluciones de impacto a retos empresariales reales junto con alumnos.</p></div>
+    <div class="card" style="border-left:4px solid var(--grey5)"><h4>4. Comunidad Global</h4><p>Intercambio de conocimiento en un entorno internacional con redes globales, intercambios académicos, residencias internacionales y asociaciones estratégicas.</p></div>
+  </div>
+
+  <div class="img-placeholder hero-img">
+    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="2"/><path d="M2 16l5-5 3 3 4-4 8 8"/></svg>
+    FOTO — Sesión de clase EGADE · Aprendizaje aplicado
+  </div>
+
+  <h3>Internacionalización y Redes Globales</h3>
+  <p>EGADE ofrece experiencias globales de alto impacto: intercambios académicos, residencias internacionales y asociaciones estratégicas. Como profesor, tienes acceso a estas redes para colaboración en investigación y docencia.</p>
+
+  <div class="media-box audio">
+    <div class="media-icon">♪</div>
+    <div class="media-info">
+      <div class="media-title">Audio — Testimonios de Profesores Internacionales</div>
+      <p class="media-desc">Experiencias de la comunidad global EGADE.</p>
+    </div>
+  </div>
+
+  <h3>Sostenibilidad e Impacto Social</h3>
+  <p>EGADE está comprometida con la construcción de una sociedad más justa y equitativa, impulsando soluciones empresariales innovadoras y sostenibles alineadas con los <strong>Objetivos de Desarrollo Sostenible (ODS)</strong>.</p>
+
+  <div class="img-placeholder" style="min-height:150px">IMAGEN — ODS y compromiso EGADE con sostenibilidad</div>
+
+  <div class="quiz-container" id="quiz2">
+    <h4>Quiz — Capítulo 2: Modelo Educativo</h4>
+    <div class="quiz-q" data-correct="a">
+      <div class="q-text">1. ¿Cuáles son las 4 dimensiones del modelo educativo EGADE?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Agentes Transformadores, Aprendizaje Aplicado, Co-creación de Valor, Comunidad Global de Aprendizaje</div>
+        <div class="q-opt" data-val="b">Investigación, Docencia, Extensión, Vinculación</div>
+        <div class="q-opt" data-val="c">Liderazgo, Innovación, Tecnología, Globalización</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Las 4 dimensiones son: Agentes Transformadores, Aprendizaje Aplicado, Co-creación de Valor y Comunidad Global de Aprendizaje.</div>
+      <div class="q-feedback neg">Incorrecto. Las 4 dimensiones del modelo educativo EGADE son: Agentes Transformadores, Aprendizaje Aplicado, Co-creación de Valor y Comunidad Global de Aprendizaje.</div>
+    </div>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">2. ¿Qué rol cumple un profesor dentro de la dimensión "Agentes Transformadores"?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Seguir estrictamente el plan de estudios establecido.</div>
+        <div class="q-opt" data-val="b">Inspirar y guiar a los líderes a impulsar la transformación en los negocios.</div>
+        <div class="q-opt" data-val="c">Investigar exclusivamente y publicar artículos académicos.</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Como profesor, eres un agente transformador que inspira y guía a futuros líderes.</div>
+      <div class="q-feedback neg">Incorrecto. El rol del profesor como agente transformador es inspirar y guiar a los líderes a impulsar la transformación, no limitarse a seguir planes o solo investigar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 3 ========== -->
+<div class="chapter-header" id="ch3">
+  <div class="ch-num">Capítulo 03</div>
+  <h2>Antes de Iniciar tu Curso</h2>
+  <p>Checklist esencial, Syllabus Maker y solicitud de materiales Harvard.</p>
+</div>
+<section class="section">
+  <h3>Checklist — Before Starting Course</h3>
+  <p>Completa los siguientes pasos esenciales antes de comenzar el trimestre:</p>
+  
+  <ul class="checklist" id="onboardingChecklist">
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 1: MI TEC</strong> — Acceder al portal. Necesitarás autenticarte con Digital Key cada 15 días. Para abrir Canvas, escribe "CANVAS" en la barra de búsqueda de MI TEC.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 2: ACADEM</strong> — Crear y actualizar tu perfil personal dentro del primer mes. Estos datos se usan para reportes de evaluación anual.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 3: Biblioteca Digital</strong> — Crear cuenta con credenciales TEC. Curso introductorio: SuccessFactors → My Learning → B.0.0.300 (español) o B.0.1.464 (inglés).</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 4: Cuenta Zoom</strong> — Ve a zoom.com → Sign Up Free → usa tu correo @tec.mx → activa tu cuenta y completa tus datos personales.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 5: Harvard Business Publishing</strong> — Ve a <a href="https://hbsp.harvard.edu" target="_blank">hbsp.harvard.edu</a> → Register → Create Account as "Educator" → en el campo Universidad elegir <strong>"EGADE Business School"</strong>. Solicitar materiales con el <a href="https://forms.office.com/r/UfnsiWtBLi" target="_blank">formulario oficial</a>.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 6: Diseño de Syllabus</strong> — Usar el EGADE Syllabus Maker para crear tu syllabus.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 6: Canvas</strong> — Configurar contenido del curso y Plan de Evaluación.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 7: Estructura y roles clave</strong> — Revisar en el Site de Facultad EGADE.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 8: Tour en campus</strong> — Coordinación de Facultad.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 9: Procedimientos administrativos</strong> — Acceso a plataformas y herramientas de comunicación.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div><strong>Paso 10: Reunión con Director de Departamento y Programa</strong> — Plan de estudios, metas, perfil del estudiante.</div></li>
+  </ul>
+
+  <div class="img-placeholder" style="min-height:150px">IMAGEN — Diagrama de flujo del proceso de onboarding (Before Starting Course → During the Term)</div>
+
+  <h3>EGADE Syllabus Maker</h3>
+  <p>Herramienta creada por la Dirección de Desarrollo Académico que ofrece una experiencia guiada de creación de syllabus con <strong>validaciones académicas</strong>. Contiene descripciones, objetivos y competencias por curso con secciones prellenadas y editables. Al finalizar, descarga tu archivo PDF listo para publicar en Canvas.</p>
+  
+  <a href="https://experiencia21.tec.mx/courses/482263" target="_blank" class="link-box">
+    <span class="lb-icon">📋</span>
+    <span class="lb-text">
+      <span class="lb-title">EGADE Syllabus Maker</span>
+      <span class="lb-url">experiencia21.tec.mx/courses/482263</span>
+    </span>
+    <span class="lb-arrow">→</span>
+  </a>
+
+  <p><strong>Para acceder:</strong> Ingresar a Canvas (experiencia21.tec.mx) con credenciales institucionales → En el tablero buscar "Modelo Educativo EGADE Business School" → Dar clic en <strong>Comenzar</strong>.</p>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video Tutorial — EGADE Syllabus Maker</div>
+      <p class="media-desc">Aprende a crear tu syllabus paso a paso.</p>
+    </div>
+  </div>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Captura del Syllabus Maker · Ejemplo de syllabus generado (Fundamentos de Mercadotecnia MT4028)</div>
+
+  <h3>Solicitud de Materiales Harvard Business Publishing</h3>
+  <p>Los casos Harvard son un pilar del <strong>aprendizaje aplicado</strong> en EGADE. Asegúrate de solicitarlos con anticipación suficiente antes del inicio de tu trimestre.</p>
+  
+  <a href="https://forms.office.com/r/UfnsiWtBLi" target="_blank" class="link-box">
+    <span class="lb-icon">📚</span>
+    <span class="lb-text">
+      <span class="lb-title">Formulario de Solicitud — Harvard Cases</span>
+      <span class="lb-url">forms.office.com/r/UfnsiWtBLi</span>
+    </span>
+    <span class="lb-arrow">→</span>
+  </a>
+  <p><strong>Contacto:</strong> Dora Karina García — <a href="mailto:dkgarciap@tec.mx">dkgarciap@tec.mx</a></p>
+
+  <div class="quiz-container" id="quiz3">
+    <h4>Quiz — Capítulo 3: Antes de Iniciar</h4>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">1. ¿Cada cuánto tiempo necesitas autenticarte en MI TEC?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Cada 30 días</div>
+        <div class="q-opt" data-val="b">Cada 15 días</div>
+        <div class="q-opt" data-val="c">Solo la primera vez</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! La autenticación con Digital Key se requiere cada 15 días.</div>
+      <div class="q-feedback neg">Incorrecto. Necesitas autenticarte con Digital Key cada 15 días para acceder a MI TEC.</div>
+    </div>
+    <div class="quiz-q" data-correct="a">
+      <div class="q-text">2. ¿Dónde encuentras el EGADE Syllabus Maker?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">En Canvas, dentro del curso "Modelo Educativo EGADE Business School"</div>
+        <div class="q-opt" data-val="b">En SuccessFactors → My Learning</div>
+        <div class="q-opt" data-val="c">En el Site de Facultad EGADE</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! El Syllabus Maker está en Canvas, dentro del curso "Modelo Educativo EGADE Business School".</div>
+      <div class="q-feedback neg">Incorrecto. El Syllabus Maker se encuentra en Canvas (experiencia21.tec.mx), dentro del curso "Modelo Educativo EGADE Business School".</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 4 ========== -->
+<div class="chapter-header" id="ch4">
+  <div class="ch-num">Capítulo 04</div>
+  <h2>Canvas y Herramientas Digitales</h2>
+  <p>Prepara tu curso, CanvasProSeries y guías paso a paso.</p>
+</div>
+<section class="section">
+  <h3>Prepara tu Curso en Canvas</h3>
+  <p>La plataforma <strong>Canvas</strong> es el punto de partida para el aprendizaje de tus alumnos. Utiliza esta lista de verificación para saber si tu curso está listo para iniciar el trimestre:</p>
+  
+  <ul class="checklist" id="canvasChecklist">
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué el <strong>objetivo general</strong> y el contenido (temas) de las sesiones.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué mi <strong>información como profesor</strong> (semblanza) y horarios de atención.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Actualicé la <strong>ficha técnica</strong> del curso (nombre, clave, programa, modalidad, periodo).</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué el <strong>syllabus</strong> del curso.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué las <strong>políticas del curso</strong> y la forma de evaluación (ponderación).</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Eliminé las <strong>leyendas y elementos</strong> de la plantilla que no necesitaré.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué la <strong>bibliografía</strong> con ligas directas a cada material.</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Publiqué el <strong>contenido por sesión</strong> (texto, videos, enlaces, documentos).</div></li>
+    <li><span class="check" onclick="this.classList.toggle('checked')">✓</span><div>Verifiqué que los <strong>archivos y enlaces</strong> se muestran correctamente.</div></li>
+  </ul>
+
+  <h3>CanvasProSeries — Guías Visuales</h3>
+  <p>Serie de guías paso a paso creadas por Desarrollo Académico para dominar Canvas:</p>
+
+  <h4>Copia, Actualiza, Publica</h4>
+  <ul>
+    <li><strong>Copia módulo por módulo:</strong> Ve al curso origen → menú de edición → Copy To → selecciona el curso destino.</li>
+    <li><strong>Copia archivo .imscc:</strong> Settings → Import Content → Paquete de importación de Cursos → arrastra el archivo .imscc.</li>
+    <li><strong>Copia curso a curso:</strong> Settings → Import Content → Copiar un curso de Canvas → activa "Incluir cursos finalizados".</li>
+  </ul>
+  <p><em>Recuerda actualizar el estatus de publicación en la sección Páginas después de copiar.</em></p>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Captura de CanvasProSeries: Copia módulo por módulo (screenshots de la guía)</div>
+
+  <h4>Publica y Organiza con Impacto</h4>
+  <ul>
+    <li><strong>Crear módulos:</strong> Sección Módulos → + Módulo → nombrar y configurar prerrequisitos.</li>
+    <li><strong>Agregar archivos:</strong> Botón agregar → Archivo → Crear archivo(s) → Elegir archivos.</li>
+    <li><strong>Agregar ligas externas:</strong> Botón agregar → URL externa → pegar liga → habilitar "cargar en pestaña nueva".</li>
+    <li><strong>Agregar encabezados:</strong> Texto de encabezado para separar contenidos por categorías.</li>
+    <li><strong>Agregar sangrías:</strong> Menú de edición → Reducir/Aumentar sangría para jerarquizar.</li>
+  </ul>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Captura de CanvasProSeries: Organización de módulos con encabezados y sangrías</div>
+
+  <h4>Pondera y Evalúa con Precisión</h4>
+  <ul>
+    <li><strong>Crear tareas:</strong> Desde módulos → Agregar → Tarea → asignar nombre, instrucciones, puntos.</li>
+    <li><strong>Asignar a alumnos específicos:</strong> Editar tarea → Asignar a → eliminar "Todos" → seleccionar alumnos.</li>
+    <li><strong>Crear grupos de tareas:</strong> Sección Tareas → + Grupo → nombrar y asignar ponderación porcentual.</li>
+    <li><strong>Coevaluación entre pares:</strong> Revisiones entre pares con asignación manual o aleatoria.</li>
+  </ul>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video Tutorial — CanvasProSeries Completo</div>
+      <p class="media-desc">Copia, organiza y configura evaluaciones en Canvas paso a paso.</p>
+    </div>
+  </div>
+
+  <p><strong>Soporte Canvas — CEDDIE:</strong> Lunes a viernes, 9:00-13:00 y 15:00-18:00 hrs.</p>
+
+  <h4>Talleres Express — Canvas y Teams</h4>
+  <p>Al inicio de cada trimestre, Desarrollo Académico organiza <strong>talleres express de 15 minutos</strong> sobre Canvas y Microsoft Teams, especialmente útiles cuando hay cambios de modalidad. Estos talleres se realizan al finalizar la sesión de inducción. Si tienes dudas puntuales, aprovecha estos espacios o contacta directamente al equipo.</p>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video — Taller Express Canvas & Teams</div>
+      <p class="media-desc">Grabación del taller express del trimestre abril-julio 2026.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3>Equipo de Diseño y Mejora Continua — Exclusivo para Programas Online</h3>
+  <p>Si impartes en alguno de los <strong>programas online</strong>, cuentas con un equipo especializado <strong>exclusivo para modalidad online</strong> que te apoya en el diseño de tus cursos en Canvas y durante tus sesiones en vivo. Este equipo no aplica para programas presenciales.</p>
+
+  <h4>Programas con apoyo de Diseño y Asesor en Calidad Académica</h4>
+  <div class="card-grid">
+    <div class="card"><h4>MBA Online</h4><p>Diseño de cursos en Canvas + Asesor en Calidad Académica</p></div>
+    <div class="card"><h4>MAF Online</h4><p>Diseño de cursos en Canvas + Asesor en Calidad Académica</p></div>
+    <div class="card"><h4>MSB</h4><p>Diseño de cursos en Canvas + Asesor en Calidad Académica</p></div>
+    <div class="card"><h4>MDE</h4><p>Diseño de cursos en Canvas + Asesor en Calidad Académica</p></div>
+    <div class="card"><h4>FTMBA</h4><p>Diseño de cursos en Canvas + Asesor en Calidad Académica</p></div>
+  </div>
+
+  <h4>¿Qué hace el Asesor en Calidad Académica?</h4>
+  <ul>
+    <li><strong>Planeación y ejecución de sesiones:</strong> Apoyo en la generación de la pauta de cada sesión.</li>
+    <li><strong>Diseño de actividades:</strong> Asesoramiento para diseño de actividades en clase de alto impacto.</li>
+    <li><strong>Iniciativas tecnológicas:</strong> Implementación de herramientas y tecnología educativa.</li>
+    <li><strong>Soporte en sesión en vivo:</strong> Apoyo durante la sesión en Zoom, Canvas y registro de participación.</li>
+    <li><strong>Retroalimentación post-sesión:</strong> 15 minutos posteriores a cada sesión para retroalimentación y planeación continua (disponible por el formato de sesión online de 2.5 hrs vs 3 hrs presencial).</li>
+  </ul>
+
+  <h4>Apoyo Continuo a Profesores de Programas Online</h4>
+  <p>El equipo de Diseño y Mejora Continua ofrece apoyo permanente <strong>exclusivamente para profesores de programas online</strong> en:</p>
+  <ul>
+    <li>Asesoría para implementación de <strong>mejores prácticas</strong> en tus cursos.</li>
+    <li><strong>Soporte Canvas</strong> especializado para programas online.</li>
+    <li><strong>Uso de IA</strong> en la enseñanza.</li>
+    <li><strong>Diseño de rúbricas</strong> de evaluación.</li>
+    <li><strong>Producción audiovisual</strong> para contenidos de curso.</li>
+  </ul>
+
+  <h4>Equipo de Diseño y Mejora Continua (Programas Online)</h4>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem">
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Alejandro Pozo</strong><br>Líder de Diseño y Mejora Continua<br><a href="mailto:pozo@tec.mx" style="font-size:.7rem">pozo@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Eyra Ramírez</strong><br>Asesora en Calidad Académica / Profesor Tutor<br><a href="mailto:eyra.ramirez@tec.mx" style="font-size:.7rem">eyra.ramirez@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Diego Ulises Rodríguez</strong><br>Especialista Producción Audiovisual<br><a href="mailto:ulyses.trabajo@tec.mx" style="font-size:.7rem">ulyses.trabajo@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Adrián Garza</strong><br>Especialista en Experiencias Digitales<br><a href="mailto:adriangarzaq@tec.mx" style="font-size:.7rem">adriangarzaq@tec.mx</a></p></div>
+  </div>
+
+  <h4>Asesoras en Calidad Académica (Programas Online)</h4>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem">
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Heidi Vázquez</strong><br><a href="mailto:heidi.vazquez@tec.mx" style="font-size:.7rem">heidi.vazquez@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Rosa Martínez</strong><br><a href="mailto:rosama.martinez@tec.mx" style="font-size:.7rem">rosama.martinez@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Liliana de León</strong><br><a href="mailto:liliana.deleon@tec.mx" style="font-size:.7rem">liliana.deleon@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Gabriela García</strong><br><a href="mailto:ggarizpe@tec.mx" style="font-size:.7rem">ggarizpe@tec.mx</a></p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Patricia de la Peña</strong><br><a href="mailto:patricia.delapena@tec.mx" style="font-size:.7rem">patricia.delapena@tec.mx</a></p></div>
+  </div>
+
+  <div class="quiz-container" id="quiz4">
+    <h4>Quiz — Capítulo 4: Canvas</h4>
+    <div class="quiz-q" data-correct="c">
+      <div class="q-text">1. ¿Qué opción debes activar al copiar curso a curso en Canvas?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Todo el contenido seleccionado</div>
+        <div class="q-opt" data-val="b">Exportar como .imscc</div>
+        <div class="q-opt" data-val="c">Incluir los cursos finalizados</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Debes activar "Incluir los cursos finalizados" para ver todos los cursos disponibles.</div>
+      <div class="q-feedback neg">Incorrecto. La opción clave es "Incluir los cursos finalizados" para poder acceder a cursos de trimestres anteriores.</div>
+    </div>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">2. ¿Qué es un grupo de tareas en Canvas?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Un grupo de alumnos asignados a una tarea.</div>
+        <div class="q-opt" data-val="b">Categorías que reflejan los rubros de evaluación del syllabus con ponderación porcentual.</div>
+        <div class="q-opt" data-val="c">Una carpeta para almacenar archivos de tareas.</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Los grupos de tareas reflejan los rubros del syllabus (ej: tareas individuales, proyecto final) con su ponderación.</div>
+      <div class="q-feedback neg">Incorrecto. Los grupos de tareas son categorías que reflejan los rubros de evaluación declarados en el syllabus, con su ponderación porcentual.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 5 ========== -->
+<div class="chapter-header" id="ch5">
+  <div class="ch-num">Capítulo 05</div>
+  <h2>Evaluación y Calidad Académica</h2>
+  <p>ECOA, EGADE Loop, políticas de evaluación y estándares de rigor académico.</p>
+</div>
+<section class="section">
+  <h3>ECOA — Encuesta de Opinión de los Alumnos</h3>
+  <p>La <strong>ECOA</strong> (Encuesta de Opinión del Estudiante) es un instrumento que todos los estudiantes del Tecnológico de Monterrey tienen derecho a responder. Su objetivo es obtener información importante sobre la percepción que tienen los alumnos de los cursos. Los resultados son fundamentales para la <strong>mejora continua, la clasificación docente y tu desarrollo profesional</strong>.</p>
+
+  <h4>Fechas de Aplicación ECOA — Trimestre Abril-Julio 2026</h4>
+  <div class="card-grid">
+    <div class="card"><h4>T1 (Sem. 1-4)</h4><p><strong>11 al 14 de mayo</strong></p></div>
+    <div class="card"><h4>T2 (Sem. 5-8)</h4><p><strong>8 al 11 de junio</strong></p></div>
+    <div class="card"><h4>T3 (Sem. 9-12)</h4><p><strong>6 al 9 de julio</strong></p></div>
+    <div class="card"><h4>T4 (Sem. 1-8)</h4><p><strong>8 al 11 de junio</strong></p></div>
+    <div class="card"><h4>T5 (Sem. 5-12)</h4><p><strong>6 al 9 de julio</strong></p></div>
+    <div class="card"><h4>Full Term</h4><p><strong>6 al 9 de julio</strong></p></div>
+  </div>
+  <p><em>Ruta: MI TEC → ECOA → ECOA Tec21 (hasta 2024) y Planes anteriores → Ir al Servicio</em></p>
+
+  <h4>Fechas de Registro de Calificaciones en Canvas</h4>
+  <p>Las calificaciones se reportarán al finalizar cada materia en <strong>Canvas</strong>. El cambio de calificaciones entra en vigor en el trimestre abril-julio 2026.</p>
+  <div class="card-grid">
+    <div class="card"><h4>T1 (Sem. 1-4)</h4><p><strong>16-19 mayo</strong> · 15:00 hrs</p></div>
+    <div class="card"><h4>T2 (Sem. 5-8)</h4><p><strong>13-16 junio</strong> · 15:00 hrs</p></div>
+    <div class="card"><h4>T3 (Sem. 9-12)</h4><p><strong>11-14 julio</strong> · 15:00 hrs</p></div>
+    <div class="card"><h4>T4 (Sem. 1-8)</h4><p><strong>13-16 junio</strong> · 15:00 hrs</p></div>
+    <div class="card"><h4>T5 (Sem. 5-12)</h4><p><strong>11-14 julio</strong> · 15:00 hrs</p></div>
+    <div class="card"><h4>Full Term</h4><p><strong>11-14 julio</strong> · 15:00 hrs</p></div>
+  </div>
+
+  <h4>Cómo acceder a la ECOA desde miTec</h4>
+  <ol>
+    <li>Ingresa a <a href="https://mitec.itesm.mx" target="_blank">mitec.itesm.mx</a> con tus credenciales institucionales.</li>
+    <li>Escribe <strong>"ECOA"</strong> en la barra de búsqueda y selecciona <strong>"ECOA Reporte para PROFESORES"</strong>, o bien, en la barra lateral izquierda selecciona <strong>"Rol Académico"</strong>.</li>
+    <li>Ubica la sección <strong>"mi Rol de Profesor"</strong>.</li>
+    <li>Selecciona el ícono de <strong>"ECOA (Reporte para PROFESORES)"</strong>.</li>
+  </ol>
+  <p>Se desplegará la pantalla donde podrás visualizar los servicios de la ECOA:</p>
+  <ul>
+    <li><strong>ECOA (Información y manuales)</strong> — Accede al SharePoint con manuales, documentos y el Calendario Operativo. Selecciona "Ir al servicio".</li>
+    <li><strong>ECOA Tec21 (hasta 2024) y Planes anteriores</strong> — Indicadores de evaluaciones previas y Posgrado.</li>
+    <li><strong>ECOA Tec21 (a partir del 2025)</strong> — Consulta la <strong>Tasa de participación</strong> y tus <strong>Resultados</strong>. Para visualizar los manuales, ingresa a "Guías ECOA Tec21 para Líderes".</li>
+  </ul>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Capturas de pantalla de la guía ECOA: acceso desde miTec, SharePoint y Tablero de Resultados</div>
+
+  <h4>Cómo interpretar tus resultados</h4>
+  <p>El reporte de la ECOA muestra un resumen compuesto por <strong>2 bloques principales</strong>:</p>
+  <ol>
+    <li><strong>"Recomendarías al profesor" (REC)</strong> — Incluye: total de opiniones (distintas a NR), promedio, desviación estándar, percentil y porcentaje de opiniones mayor o igual a 9.</li>
+    <li><strong>"Profesor Inspirador"</strong> — Resume los resultados de las preguntas 5 (nivel de reto intelectual), 6 (guía del aprendizaje) y 7 (¿Recomendarías a un amigo llevar clases con este profesor?).</li>
+  </ol>
+  <p>Para consultar el detalle de tus resultados, usa los <strong>3 botones</strong> disponibles en el reporte:</p>
+  <ul>
+    <li><strong>Detalle por Grupo:</strong> Consulta las opiniones de los alumnos por tipo de encuesta y grupo. Desde aquí puedes ir al reporte de comentarios de cada grupo.</li>
+    <li><strong>Comentarios:</strong> Consulta los comentarios cualitativos de los alumnos hacia ti como profesor.</li>
+    <li><strong>Detalle por Pregunta:</strong> Consulta las frecuencias de respuesta para cada una de las preguntas de la encuesta.</li>
+  </ul>
+  <p><em>Tip: Puedes guardar el reporte en formato PDF haciendo clic en "Guardar", o agregar el servicio ECOA a tus favoritos en MiEspacio posicionando el cursor sobre el ícono de la banderilla (cambia de negro a rojo).</em></p>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Capturas del reporte ECOA: Resumen de resultados (Recomendación del profesor + Profesor Inspirador), Detalle por Grupo, Comentarios y Detalle por Pregunta</div>
+
+  <h4>Coordinación de la ECOA por trimestre</h4>
+  <p>La aplicación de la ECOA cada trimestre es coordinada por los <strong>coordinadores de facultad</strong>. Ellos te apoyarán con el proceso, fechas y cualquier duda:</p>
+
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey2)">BB</div>
+    <div class="contact-info">
+      <h4>Begoña Montserrat Bulnes Vicente</h4>
+      <div class="role">Coordinadora de Facultad EGADE SF, GDA y QRO · Depto. de Emprendimiento e Innovación</div>
+      <a href="mailto:begobulnes@tec.mx">begobulnes@tec.mx</a>
+    </div>
+  </div>
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey3)">SA</div>
+    <div class="contact-info">
+      <h4>Sebastián Alejandro Aguilera Luna</h4>
+      <div class="role">Coordinador de Facultad EGADE Mty · Depto. de Mercadotecnia y Análisis</div>
+      <a href="mailto:aguilerasa@tec.mx">aguilerasa@tec.mx</a>
+    </div>
+  </div>
+
+  <p><strong>TECservices:</strong> Si necesitas ayuda adicional con la ECOA — Lunes a viernes 8:00 a.m. a 6:00 p.m. (TCM). WhatsApp: 8116255123 · Tel: +528183582000 · <a href="mailto:tecservices@servicios.tec.mx">tecservices@servicios.tec.mx</a></p>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video — Cómo acceder a la ECOA desde miTec</div>
+      <p class="media-desc">Tutorial paso a paso para consultar tus resultados de evaluación docente.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3>Dashboard Académico</h3>
+  <p>EGADE cuenta con un nuevo <strong>dashboard académico</strong> que te permite visualizar la información de los cursos que impartirás en el trimestre. Este dashboard muestra:</p>
+  <ul>
+    <li>Materias asignadas y cotitulares.</li>
+    <li>Estatus de confirmación en la programación.</li>
+    <li>Número de unidades y programa.</li>
+    <li>Calendario semanal con días y fechas de cada sesión.</li>
+    <li>Detalle por curso: semanas de impartición, horarios y salón.</li>
+  </ul>
+  <p>Los coordinadores de facultad compartirán el link y el archivo Excel para que puedas cargar tu información y consultar salón, fechas y horarios de manera rápida:</p>
+  <ul>
+    <li><strong>Begoña Montserrat Bulnes Vicente</strong>, Coordinadora de Facultad (SF, GDA, QRO) — <a href="mailto:begobulnes@tec.mx">begobulnes@tec.mx</a></li>
+    <li><strong>Sebastián Alejandro Aguilera Luna</strong>, Coordinador de Facultad (MTY) — <a href="mailto:aguilerasa@tec.mx">aguilerasa@tec.mx</a></li>
+  </ul>
+  
+  <div class="img-placeholder" style="min-height:180px">IMAGEN — Captura del Dashboard Académico con ejemplo de visualización de cursos por trimestre</div>
+
+  <div class="media-box audio">
+    <div class="media-icon">♪</div>
+    <div class="media-info">
+      <div class="media-title">Audio — Resumen de la Sesión de Inducción (8 de abril, 2026)</div>
+      <p class="media-desc">Puntos clave abordados: rankings, modelo educativo, CanvasProSeries, dashboard académico y talleres express.</p>
+    </div>
+  </div>
+
+  <h3>EGADE Loop — Herramienta de Coevaluación</h3>
+  <p>EGADE Loop es una herramienta de coevaluación diseñada para facilitar la evaluación entre pares en proyectos colaborativos. Permite crear formularios que los alumnos completan para evaluar la contribución de sus compañeros de equipo.</p>
+
+  <a href="https://angellicromero.github.io/egade-coevaluacion/" target="_blank" class="link-box">
+    <span class="lb-icon">🔄</span>
+    <span class="lb-text">
+      <span class="lb-title">EGADE Loop — Coevaluación</span>
+      <span class="lb-url">angellicromero.github.io/egade-coevaluacion</span>
+    </span>
+    <span class="lb-arrow">→</span>
+  </a>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video Tutorial — EGADE Loop</div>
+      <p class="media-desc">Cómo crear y gestionar coevaluaciones para tus cursos.</p>
+    </div>
+  </div>
+
+  <h3>Políticas de Evaluación EGADE</h3>
+  <p>EGADE es una escuela de prestigio y <strong>alto rigor académico</strong>. Lineamientos clave:</p>
+  <ul>
+    <li>Evaluaciones justas con <strong>promedio esperado entre 85 y 89</strong>.</li>
+    <li>Al menos <strong>50% de evaluación individual</strong>.</li>
+    <li>No más del <strong>20% de estudiantes con calificación superior a 95</strong>.</li>
+    <li><strong>Coevaluación mínima del 20%</strong> en proyectos colaborativos.</li>
+    <li><strong>Rúbricas</strong> disponibles en Canvas.</li>
+    <li><strong>Integridad académica</strong> y uso ético de Inteligencia Artificial.</li>
+    <li>Asistencia, puntualidad, preparación previa y entregas oportunas.</li>
+  </ul>
+
+  <div class="quiz-container" id="quiz5">
+    <h4>Quiz — Capítulo 5: Evaluación</h4>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">1. ¿Cuál es el porcentaje mínimo de evaluación individual en EGADE?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">40%</div>
+        <div class="q-opt" data-val="b">50%</div>
+        <div class="q-opt" data-val="c">60%</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Al menos el 50% de la evaluación debe ser individual.</div>
+      <div class="q-feedback neg">Incorrecto. El mínimo de evaluación individual es 50%, según las políticas de EGADE.</div>
+    </div>
+    <div class="quiz-q" data-correct="a">
+      <div class="q-text">2. ¿Cuál es el promedio esperado en los cursos EGADE?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Entre 85 y 89</div>
+        <div class="q-opt" data-val="b">Entre 90 y 95</div>
+        <div class="q-opt" data-val="c">Entre 80 y 85</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! El promedio esperado es entre 85 y 89 puntos.</div>
+      <div class="q-feedback neg">Incorrecto. Las políticas de evaluación de EGADE establecen un promedio esperado entre 85 y 89.</div>
+    </div>
+    <div class="quiz-q" data-correct="c">
+      <div class="q-text">3. ¿Cómo accedes a tus resultados de la ECOA?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Directamente en Canvas, sección Calificaciones.</div>
+        <div class="q-opt" data-val="b">Tu Director de Departamento te los envía por correo.</div>
+        <div class="q-opt" data-val="c">En miTec, buscando "ECOA" y seleccionando "ECOA Reporte para PROFESORES".</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Accedes desde miTec buscando "ECOA" y seleccionando "ECOA Reporte para PROFESORES" en la sección "mi Rol de Profesor".</div>
+      <div class="q-feedback neg">Incorrecto. Para ver tus resultados ECOA debes entrar a miTec (mitec.itesm.mx), buscar "ECOA" y seleccionar "ECOA Reporte para PROFESORES".</div>
+    </div>
+    <div class="quiz-q" data-correct="b">
+      <div class="q-text">4. ¿Quién es el contacto para resolver dudas sobre la ECOA?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">Mariana Núñez Almanza (mariananual@tec.mx)</div>
+        <div class="q-opt" data-val="b">Víctor Esteban Carranza Hernández (victorecarranza@tec.mx)</div>
+        <div class="q-opt" data-val="c">CEDDIE soporte Canvas</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! Víctor Esteban Carranza Hernández (victorecarranza@tec.mx) es el contacto para dudas sobre la ECOA.</div>
+      <div class="q-feedback neg">Incorrecto. El contacto para dudas sobre la ECOA es Víctor Esteban Carranza Hernández (victorecarranza@tec.mx).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 6 ========== -->
+<div class="chapter-header" id="ch6">
+  <div class="ch-num">Capítulo 06</div>
+  <h2>Desarrollo Profesional y Comunidad</h2>
+  <p>Tu trayectoria en EGADE, Tech&Learning Week, publicaciones y redes.</p>
+</div>
+<section class="section">
+  <h3>Trayectoria de Desarrollo del Profesor</h3>
+  <p>Tu desarrollo profesional en EGADE se estructura en <strong>tres etapas progresivas</strong>:</p>
+  <p style="background:var(--grey7);padding:1rem 1.2rem;border-radius:4px;border-left:3px solid var(--black);font-size:.95rem;margin-bottom:2rem"><em>"Queremos que este espacio se convierta en un espacio para que ustedes nos compartan sus mejores prácticas."</em> — <strong>Mariana Núñez Almanza</strong>, Sesión de Inducción, abril 2026.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4>0–3 meses · Acercamiento Inicial</h4>
+      <p>Onboarding institucional, modelo educativo EGADE, configuración de Canvas, autodiagnóstico de competencias, reuniones con Director de Departamento, cursos de inducción CEDDIE.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>3–12 meses · Consolidación</h4>
+      <p>Acompañamiento pedagógico, cursos avanzados CEDDIE, clasificación docente, observación de clase y feedback, mis Compromisos en SuccessFactors, participación en eventos EGADE.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>12+ meses · Desarrollo Continuo</h4>
+      <p>Plan de desarrollo en SuccessFactors, investigación y publicación, vitalidad intelectual, evaluación anual de desempeño, ruta de Clasificación Docente, mentoría a profesores nuevos.</p>
+    </div>
+  </div>
+
+  <div class="img-placeholder" style="min-height:180px">IMAGEN — Diagrama visual de la trayectoria de desarrollo (3 etapas)</div>
+
+  <h3>IFE Conference — Congreso Internacional de Innovación Educativa</h3>
+  <p>El <strong>IFE Conference</strong>, organizado por el <strong>Institute for the Future of Education (IFE)</strong> del Tecnológico de Monterrey, es uno de los eventos más importantes en innovación educativa en el mundo de habla hispana. Desde su creación en 2006 (antes conocido como CIIE), ha reunido a más de 34,000 participantes de más de 40 países.</p>
+  
+  <p>La edición 2026, bajo el lema <strong>"Perspectivas para el futuro de la educación"</strong>, se celebró del <strong>27 al 29 de enero de 2026</strong> en Campus Monterrey, con más de 500 actividades destinadas al aprendizaje, colaboración e innovación. EGADE Business School participó activamente con paneles y ponencias sobre educación, talento, innovación y el futuro del trabajo.</p>
+  
+  <p><strong>¿Por qué participar como profesor EGADE?</strong></p>
+  <ul>
+    <li>Conocer las tendencias educativas más actuales a nivel global.</li>
+    <li>Conectar con expertos internacionales e investigadores.</li>
+    <li>Identificar recursos para mejorar tu enseñanza.</li>
+    <li>Presentar tu trabajo: papers de investigación, innovación, libros o casos de estudio.</li>
+    <li>Los trabajos seleccionados pueden publicarse en la serie <strong>"Lecture Notes in Educational Technology" de Springer</strong>, indexada en Scopus.</li>
+  </ul>
+
+  <p><strong>Categorías de participación:</strong> Research papers, Innovation papers, presentación de libros y casos de innovación educativa.</p>
+  
+  <a href="https://ifeconference.tec.mx/en-US/" target="_blank" class="link-box">
+    <span class="lb-icon">🎓</span>
+    <span class="lb-text">
+      <span class="lb-title">IFE Conference — Sitio Oficial</span>
+      <span class="lb-url">ifeconference.tec.mx</span>
+    </span>
+    <span class="lb-arrow">→</span>
+  </a>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Fotos del IFE Conference: Arena Borregos Campus Monterrey, conferencias magistrales, networking</div>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video — Highlights IFE Conference</div>
+      <p class="media-desc">Conferencias magistrales disponibles en live.tec.mx/ifeconference</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3>Tech&Learning EGADE Week Latinoamérica 2026</h3>
+  <p>Evento creado por la Dirección de Desarrollo Académico para promover el intercambio entre profesores. <strong>Del 26 al 29 de octubre, 2026</strong> en formato online.</p>
+  <p><em>"De conversaciones paralelas a aprendizaje colectivo con impacto."</em></p>
+  <p><strong>Modalidades de participación:</strong></p>
+  <ul>
+    <li><strong>Conversatorio</strong> — experiencias y marcos estratégicos (máx. 50 min).</li>
+    <li><strong>Panel temático interinstitucional</strong> — mín. 3 instituciones (máx. 50 min).</li>
+    <li><strong>Actividades interactivas</strong> — talleres, laboratorios, mesas de trabajo (máx. 50 min).</li>
+    <li><strong>Infografía o poster digital</strong> — experiencias y marcos educativos.</li>
+  </ul>
+  <p><strong>Recepción de propuestas:</strong> 2 de marzo al 1 de julio de 2026.</p>
+
+  <a href="https://forms.office.com/r/9ertVLAiTt" target="_blank" class="link-box">
+    <span class="lb-icon">🌐</span>
+    <span class="lb-text">
+      <span class="lb-title">Registro — Tech&Learning EGADE Week 2026</span>
+      <span class="lb-url">forms.office.com/r/9ertVLAiTt</span>
+    </span>
+    <span class="lb-arrow">→</span>
+  </a>
+
+  <div class="img-placeholder" style="min-height:200px">IMAGEN — Flyer Tech&Learning EGADE Week Latinoamérica 2026</div>
+
+  <div class="media-box video">
+    <div class="media-icon">▶</div>
+    <div class="media-info">
+      <div class="media-title">Video Promocional — Tech&Learning EGADE Week</div>
+      <p class="media-desc">Conoce el evento y cómo participar.</p>
+    </div>
+  </div>
+
+  <h3>Seminarios Mensuales de Investigación</h3>
+  <p>Cada mes, EGADE lleva a cabo <strong>seminarios de investigación</strong> abiertos a toda la facultad. Es un espacio para compartir avances, hallazgos y mejores prácticas. Los coordinadores de facultad te harán llegar la invitación:</p>
+
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey2)">BB</div>
+    <div class="contact-info">
+      <h4>Begoña Montserrat Bulnes Vicente</h4>
+      <div class="role">Coordinadora de Facultad EGADE SF, GDA y QRO · Departamento de Emprendimiento e Innovación</div>
+      <a href="mailto:begobulnes@tec.mx">begobulnes@tec.mx</a>
+    </div>
+  </div>
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey3)">SA</div>
+    <div class="contact-info">
+      <h4>Sebastián Alejandro Aguilera Luna</h4>
+      <div class="role">Coordinador de Facultad EGADE Mty · Departamento de Mercadotecnia y Análisis</div>
+      <a href="mailto:aguilerasa@tec.mx">aguilerasa@tec.mx</a>
+    </div>
+  </div>
+
+  <div class="media-box audio">
+    <div class="media-icon">♪</div>
+    <div class="media-info">
+      <div class="media-title">Audio — Próximo Seminario de Investigación</div>
+      <p class="media-desc">Información sobre el siguiente seminario disponible a través de tu coordinador de facultad.</p>
+    </div>
+  </div>
+
+  <h3>Publicaciones y Comunidad EGADE</h3>
+  <p>Canales de conocimiento donde puedes contribuir como profesor:</p>
+  <div class="card-grid">
+    <div class="card"><h4>EGADE Insights</h4><p>Blog de análisis y tendencias de negocios.</p><a href="https://blog.egade.tec.mx/" target="_blank">Visitar →</a></div>
+    <div class="card"><h4>EGADE Ideas</h4><p>Publicaciones de pensamiento y opinión.</p><a href="https://egade.tec.mx/es/egade-ideas" target="_blank">Visitar →</a></div>
+    <div class="card"><h4>EGADE en los Medios</h4><p>Presencia mediática institucional.</p><a href="https://egade.tec.mx/es/egade-en-los-medios" target="_blank">Visitar →</a></div>
+    <div class="card"><h4>Territorio Negocios</h4><p>Podcast institucional de EGADE.</p><a href="https://tec.mx/es/tec-sounds-podcasts" target="_blank">Escuchar →</a></div>
+  </div>
+
+  <div class="media-box audio">
+    <div class="media-icon">♪</div>
+    <div class="media-info">
+      <div class="media-title">Podcast — Territorio Negocios</div>
+      <p class="media-desc">Último episodio disponible. Escucha y contribuye.</p>
+    </div>
+  </div>
+
+  <div class="quiz-container" id="quiz6">
+    <h4>Quiz — Capítulo 6: Desarrollo</h4>
+    <div class="quiz-q" data-correct="c">
+      <div class="q-text">1. ¿En qué fechas se celebra la Tech&Learning EGADE Week 2026?</div>
+      <div class="q-options">
+        <div class="q-opt" data-val="a">15 al 18 de septiembre</div>
+        <div class="q-opt" data-val="b">1 al 4 de noviembre</div>
+        <div class="q-opt" data-val="c">26 al 29 de octubre</div>
+      </div>
+      <div class="q-feedback pos">¡Correcto! La Tech&Learning EGADE Week 2026 será del 26 al 29 de octubre en formato online.</div>
+      <div class="q-feedback neg">Incorrecto. Las fechas correctas son del 26 al 29 de octubre de 2026, en formato online.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHAPTER 7 ========== -->
+<div class="chapter-header" id="ch7">
+  <div class="ch-num">Capítulo 07</div>
+  <h2>Contactos y Recursos Clave</h2>
+  <p>Tu equipo de apoyo y las herramientas esenciales para tu éxito como profesor.</p>
+</div>
+<section class="section">
+  <h3>Dirección de Desarrollo Académico</h3>
+  <p>Para <strong>diseño de sesiones, clases o actividades</strong> contacta a las especialistas del equipo:</p>
+  
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--black)">MN</div>
+    <div class="contact-info">
+      <h4>Mariana Núñez Almanza</h4>
+      <div class="role">Directora de Desarrollo Académico EGADE</div>
+      <a href="mailto:mariananual@tec.mx">mariananual@tec.mx</a>
+      <p style="font-size:.85rem;margin-top:.4rem;color:var(--grey3)">Modelo educativo, formación y acompañamiento docente, autodiagnóstico de competencias, plan de evaluación, Training on Assessment Plan in Canvas.</p>
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey2)">AR</div>
+    <div class="contact-info">
+      <h4>Stephanie Angellic Romero Romero</h4>
+      <div class="role">Especialista en Prácticas de Enseñanza</div>
+      <a href="mailto:sa.romero@tec.mx">sa.romero@tec.mx</a>
+      <p style="font-size:.85rem;margin-top:.4rem;color:var(--grey3)">Diseño de sesiones, clases y actividades de alto impacto, estrategias de aprendizaje activo, innovación educativa y tecnología, evaluación formativa, mejora de práctica docente.</p>
+    </div>
+  </div>
+
+  <div class="contact-card">
+    <div class="contact-avatar" style="background:var(--grey4)">MG</div>
+    <div class="contact-info">
+      <h4>Mili Gómez</h4>
+      <div class="role">Especialista en Diseño y Evaluación del Aprendizaje</div>
+      <a href="mailto:blancaegomez@tec.mx">blancaegomez@tec.mx</a>
+      <p style="font-size:.85rem;margin-top:.4rem;color:var(--grey3)">Diseño de evaluaciones y rúbricas, autodiagnóstico de competencias, plan de evaluación del curso.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3>Equipo de Facultad EGADE</h3>
+  <p>Conoce al equipo directivo y de coordinación que te acompañará en tu trayectoria:</p>
+
+  <h4>Decanatura y Dirección Asociada</h4>
+  <div class="card-grid">
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto .8rem;min-height:auto">FOTO</div><h4 style="margin:0">Dr. Ernesto Amorós</h4><p style="margin:0;font-size:.85rem;color:var(--grey3)">Decano de Facultad<br>EGADE Business School</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto .8rem;min-height:auto">FOTO</div><h4 style="margin:0">Dra. Eva Guerra</h4><p style="margin:0;font-size:.85rem;color:var(--grey3)">Decana Académica<br>EGADE Business School</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:100px;height:100px;border-radius:50%;margin:0 auto .8rem;min-height:auto">FOTO</div><h4 style="margin:0">Ana Paty Meráz</h4><p style="margin:0;font-size:.85rem;color:var(--grey3)">Directora Asociada de Facultad<br>EGADE Business School</p></div>
+  </div>
+
+  <h4>Directores de Departamento</h4>
+  <div class="card-grid">
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Dra. Lucila Osorio</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Mercadotecnia e Inteligencia de Negocios</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Dr. Eduardo Saucedo</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Finanzas y Economía</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Dr. Fernando Moya</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Emprendimiento e Innovación</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Dr. José Manuel Maraboto</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Estrategia y Liderazgo</p></div>
+  </div>
+
+  <h4>Coordinadores de Facultad</h4>
+  <div class="card-grid">
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Begoña Bulnes</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Coordinadora de Facultad<br>Finanzas y Emprendimiento (SF, GDA, QRO)</p><p style="margin:.3rem 0 0;font-size:.75rem"><a href="mailto:begobulnes@tec.mx">begobulnes@tec.mx</a></p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Sebastián Aguilera</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Coordinador de Facultad<br>Estrategia y Mercadotecnia (MTY)</p><p style="margin:.3rem 0 0;font-size:.75rem"><a href="mailto:aguilerasa@tec.mx">aguilerasa@tec.mx</a></p></div>
+  </div>
+
+  <h4>Coordinación de Iniciativas y TEC Services</h4>
+  <div class="card-grid">
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Brenda Medina</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Coordinadora de Iniciativas Estratégicas</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Itzel Priego</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">TEC Services — Programación de Cursos</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Nubia Sanmiguel</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">TEC Services — Movilidad, GVF, campus visit<br>Atención profesores MTY</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Gabriela Romero</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">TEC Services — Investigación, Rankings, FoE<br>Atención profesores SF, QRO, GDL</p></div>
+    <div class="card" style="text-align:center"><div class="img-placeholder" style="width:80px;height:80px;border-radius:50%;margin:0 auto .6rem;min-height:auto;font-size:.6rem">FOTO</div><h4 style="margin:0;font-size:.8rem">Miriam García Alvarado</h4><p style="margin:0;font-size:.8rem;color:var(--grey3)">Líder de Inteligencia de Facultad e Investigación (ACADEM)</p><p style="margin:.3rem 0 0;font-size:.75rem"><a href="mailto:mygarcia@tec.mx">mygarcia@tec.mx</a></p></div>
+  </div>
+
+  <h4>Directores de Programa</h4>
+  <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem">
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Luis Jacob</strong><br>MBD MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Pedro Carrión</strong><br>MBM MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dra. Silvana Dakduk</strong><br>MMT MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Jatinder Jit</strong><br>MBA-B MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dra. Alicia Galindo</strong><br>MAF Nacional</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dra. Fabiola Vásquez</strong><br>MBD SF</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Pablo Buitrón</strong><br>MBA-A MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Esteban Koberg</strong><br>MSB MTY</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Juan Carlos Rivera</strong><br>MBA-A Nacional</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Alberto Méndez</strong><br>MAF SF</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. J.C. Bustamante</strong><br>MMT SF</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Ricardo Buitrago</strong><br>Programas Doctorales</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dra. Luciana Manfredi</strong><br>MBA Online</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Raúl Montalvo</strong><br>MBA-A GDL</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dra. Paulina López</strong><br>MGN</p></div>
+    <div class="card" style="text-align:center;padding:1rem"><div class="img-placeholder" style="width:64px;height:64px;border-radius:50%;margin:0 auto .5rem;min-height:auto;font-size:.5rem">FOTO</div><p style="margin:0;font-size:.75rem"><strong>Dr. Eric Porras</strong><br>EMBA SF</p></div>
+  </div>
+
+  <h3>Coordinadores de Facultad</h3>
+  <div class="card-grid">
+    <div class="card"><h4>SF, GDA, QRO</h4><p>Begoña Montserrat Bulnes Vicente<br><span style="font-size:.85rem;color:var(--grey3)">Coordinadora de Facultad · Depto. de Emprendimiento e Innovación</span><br><a href="mailto:begobulnes@tec.mx">begobulnes@tec.mx</a></p></div>
+    <div class="card"><h4>Monterrey</h4><p>Sebastián Alejandro Aguilera Luna<br><span style="font-size:.85rem;color:var(--grey3)">Coordinador de Facultad · Depto. de Mercadotecnia y Análisis</span><br><a href="mailto:aguilerasa@tec.mx">aguilerasa@tec.mx</a></p></div>
+  </div>
+
+  <h3>Recursos Humanos por Campus</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Monterrey</h4><p><strong>Jimena García</strong><br><a href="mailto:jimena.gdelon@tec.mx">jimena.gdelon@tec.mx</a><br><strong>Marissa Rojas</strong><br><a href="mailto:marissa.rojas@tec.mx">marissa.rojas@tec.mx</a></p></div>
+    <div class="card"><h4>Santa Fe (CDMX)</h4><p><strong>Astrid Archundia</strong><br><a href="mailto:astrid.archundia@tec.mx">astrid.archundia@tec.mx</a></p></div>
+    <div class="card"><h4>Guadalajara</h4><p><strong>Irma Domínguez</strong><br><a href="mailto:idominguez@tec.mx">idominguez@tec.mx</a></p></div>
+  </div>
+
+  <h3>Soporte Adicional</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Harvard Cases</h4><p>Dora Karina García<br><a href="mailto:dkgarciap@tec.mx">dkgarciap@tec.mx</a></p></div>
+    <div class="card"><h4>ACADEM</h4><p>Miriam García<br><a href="mailto:mygarcia@tec.mx">mygarcia@tec.mx</a></p></div>
+    <div class="card"><h4>Biblioteca Digital</h4><p>Edith Salazar<br><a href="mailto:edith.salazar@tec.mx">edith.salazar@tec.mx</a></p></div>
+    <div class="card"><h4>Diseño de Syllabus</h4><p>Stephanie Angellic Romero Romero<br><a href="mailto:sa.romero@tec.mx">sa.romero@tec.mx</a></p></div>
+  </div>
+
+  <h3>Servicios Protect (Seguridad)</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Acompañamiento</h4><p>Acompañamiento nocturno a estacionamientos lejanos y domicilios cercanos. Solicita en las casetas de acceso.</p></div>
+    <div class="card"><h4>Auxilio Vial</h4><p>Cambio de llanta, inflado, pasa corriente, solicitud de grúa o cerrajero. Solicita a los Oficiales de Seguridad.</p></div>
+    <div class="card"><h4>LOCATEC</h4><p>Recepción, custodia y entrega de artículos extraviados dentro de la sede.</p></div>
+    <div class="card"><h4>Guarda Laptop / Lockers</h4><p>MTY: Guarda laptop en Caseta EGADE-Sótano 1. SF: Trámite de locker en LOCATEC Profesional (Aulas 2, Nivel 0).</p></div>
+  </div>
+  <p><strong>Emergencias:</strong> MTY: 81 8625 6299 Ext. 3672 · SF: 55 9177 8284</p>
+
+  <h4>IT Support por Campus</h4>
+  <ul>
+    <li><strong>Monterrey:</strong> +52 81 1017 4990</li>
+    <li><strong>Santa Fe:</strong> +52 55 1687 4603</li>
+    <li><strong>Guadalajara:</strong> +52 33 1520 8810</li>
+  </ul>
+  <p><strong>TECservices:</strong> WhatsApp 8116255123 · Tel +528183582000 · <a href="mailto:tecservices@servicios.tec.mx">tecservices@servicios.tec.mx</a> · Atención presencial en campus. Lunes a viernes 8:00 a.m. a 6:00 p.m. (TCM).</p>
+  
+  <h4>Servicios de TI Esenciales</h4>
+  <ul>
+    <li><strong>Llave Digital:</strong> Habilitación y actualización por cambio de dispositivo. Accede: <em>millavedigital.tec.mx</em></li>
+    <li><strong>Cambio de contraseña:</strong> MI TEC → "¿Olvidaste tu contraseña?"</li>
+    <li><strong>Configuración de impresora:</strong> Guía en <em>print.tec.mx</em></li>
+    <li><strong>Red inalámbrica:</strong> Red "TEC" · Usuario: Nómina · Contraseña: Password de MiTec</li>
+  </ul>
+
+  <p><strong>Canvas CEDDIE:</strong> Lunes a viernes, 9:00-13:00 y 15:00-18:00 hrs.</p>
+
+  <hr class="divider">
+
+  <h3>Recursos Digitales y Links Esenciales</h3>
+  
+  <a href="https://experiencia21.tec.mx/courses/482263" target="_blank" class="link-box">
+    <span class="lb-icon">📋</span>
+    <span class="lb-text"><span class="lb-title">EGADE Syllabus Maker</span><span class="lb-url">experiencia21.tec.mx/courses/482263</span></span>
+    <span class="lb-arrow">→</span>
+  </a>
+  <a href="https://angellicromero.github.io/egade-coevaluacion/" target="_blank" class="link-box">
+    <span class="lb-icon">🔄</span>
+    <span class="lb-text"><span class="lb-title">EGADE Loop — Coevaluación</span><span class="lb-url">angellicromero.github.io/egade-coevaluacion</span></span>
+    <span class="lb-arrow">→</span>
+  </a>
+  <a href="https://forms.office.com/r/UfnsiWtBLi" target="_blank" class="link-box">
+    <span class="lb-icon">📚</span>
+    <span class="lb-text"><span class="lb-title">Harvard Cases — Formulario de Solicitud</span><span class="lb-url">forms.office.com/r/UfnsiWtBLi</span></span>
+    <span class="lb-arrow">→</span>
+  </a>
+  <a href="https://forms.office.com/r/9ertVLAiTt" target="_blank" class="link-box">
+    <span class="lb-icon">🌐</span>
+    <span class="lb-text"><span class="lb-title">Tech&Learning EGADE Week 2026</span><span class="lb-url">forms.office.com/r/9ertVLAiTt</span></span>
+    <span class="lb-arrow">→</span>
+  </a>
+  <a href="https://ifeconference.tec.mx/en-US/" target="_blank" class="link-box">
+    <span class="lb-icon">🎓</span>
+    <span class="lb-text"><span class="lb-title">IFE Conference — Congreso Internacional de Innovación Educativa</span><span class="lb-url">ifeconference.tec.mx</span></span>
+    <span class="lb-arrow">→</span>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">EGADE Business School</div>
+  <p>Tecnológico de Monterrey · 30 Años</p>
+  <p style="margin-top:.5rem;font-style:italic">"Challenge the present, Shape the future"</p>
+  <p style="margin-top:1.5rem">Dirección de Desarrollo Académico · Periodo Abril — Julio 2026</p>
+  <p style="margin-top:1rem;font-size:.75rem">AACSB · AMBA · EQUIS</p>
+  <p style="margin-top:1rem">
+    <a href="https://www.linkedin.com/school/egade-business-school/" target="_blank">LinkedIn</a> · 
+    <a href="https://www.instagram.com/egadebusinessschool/" target="_blank">Instagram</a> · 
+    <a href="https://www.youtube.com/user/EGADEBusinessSchool" target="_blank">YouTube</a> · 
+    <a href="https://twitter.com/egade" target="_blank">X</a>
+  </p>
+  <p style="margin-top:1.5rem;font-size:.7rem;color:var(--grey3)">Rufino Tamayo y Av. Eugenio Garza Lagüera, Valle Oriente, 66269 San Pedro Garza García, N.L.<br>© 2026 EGADE Business School. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progressBar').style.width=pct+'%';
+});
+
+// Quiz logic
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const correct=q.dataset.correct;
+  const feedPos=q.querySelector('.q-feedback.pos');
+  const feedNeg=q.querySelector('.q-feedback.neg');
+  q.querySelectorAll('.q-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      // Reset
+      q.querySelectorAll('.q-opt').forEach(o=>{o.classList.remove('correct','incorrect');o.style.pointerEvents='none'});
+      feedPos.classList.remove('show');
+      feedNeg.classList.remove('show');
+      if(opt.dataset.val===correct){
+        opt.classList.add('correct');
+        feedPos.classList.add('show');
+      }else{
+        opt.classList.add('incorrect');
+        // Show which was correct
+        q.querySelectorAll('.q-opt').forEach(o=>{if(o.dataset.val===correct)o.classList.add('correct')});
+        feedNeg.classList.add('show');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
